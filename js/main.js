@@ -27,10 +27,16 @@ let itemAttivo = 0;
 // Seleziono pulsante NEXT
 const next = document.querySelector(".next");
 
+// Seleziono pulsante PREVIOUS
+const previous = document.querySelector(".previous");
+previous.classList.add("hidden");   // Setto valore = NASCONDO di base
+
 // Collego funzione ad EVENTO su NEXT
 next.addEventListener("click", miaFunzione);
 
 function miaFunzione() {
+    previous.classList.remove("hidden");                // Pulsante PREVIOUS ritorna visibile
+
     if (itemAttivo < (items.length - 1)) {              // SE sono nelle prime 4 immagini
         items[itemAttivo].classList.remove("active");   // Rimuovo classe ACTIVE all'ITEM attualmente attivo
         itemAttivo += 1;                                // Incremento valore dell' ITEM ATTIVO
@@ -40,5 +46,18 @@ function miaFunzione() {
             next.classList.add("hidden");               // NASCONDO pulsante NEXT
         }
     }
+}
 
+// Collego funzione ad EVENTO su PREVIOUS
+previous.addEventListener("click", miaFunzione1);
+
+function miaFunzione1() {
+    if (itemAttivo === 1) {                             // Quando l'ITEM attivo è l'1 (foto 2),
+        previous.classList.add("hidden");               // Al CLICK, PREVIOUS scompare di nuovo
+    } if (itemAttivo < (items.length)) {                // SE sono in tutte e 5 le immagini (per la 4° non vale)
+        next.classList.remove("hidden");                // RIMOSTRO pulsante NEXT
+        items[itemAttivo].classList.remove("active");   // Rimuovo classe ACTIVE all'ITEM attualmente attivo
+        itemAttivo -= 1;                                // Decremento valore dell' ITEM ATTIVO
+        items[itemAttivo].classList.add("active");      // Assegno classe ACTIVE all'elemento (attualmente) precedente
+    }
 }
