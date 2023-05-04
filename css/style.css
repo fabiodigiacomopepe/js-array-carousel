@@ -26,11 +26,6 @@
     display: none;
 }
 
-/* Quando attivo */
-.active {
-    display: block;
-}
-
 /* Regole immagini */
 img {
     height: 80vh;
@@ -64,4 +59,14 @@ img {
 .previous {
     left: 50%;
     bottom: 85%;
+}
+
+/* Quando attivo */
+.active {
+    display: block;
+}
+
+/* Quando nascosto */
+.hidden {
+    display: none;
 }
