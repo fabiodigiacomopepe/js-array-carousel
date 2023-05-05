@@ -29,35 +29,27 @@ const next = document.querySelector(".next");
 
 // Seleziono pulsante PREVIOUS
 const previous = document.querySelector(".previous");
-previous.classList.add("hidden");   // Setto valore = NASCONDO di base
 
 // Collego funzione ad EVENTO su NEXT
 next.addEventListener("click", miaFunzione);
 
 function miaFunzione() {
-    previous.classList.remove("hidden");                // Pulsante PREVIOUS ritorna visibile
-
-    if (itemAttivo < (items.length - 1)) {              // SE sono nelle prime 4 immagini
-        items[itemAttivo].classList.remove("active");   // Rimuovo classe ACTIVE all'ITEM attualmente attivo
-        itemAttivo += 1;                                // Incremento valore dell' ITEM ATTIVO
-        items[itemAttivo].classList.add("active");      // Assegno classe ACTIVE all'elemento (attualmente) successivo
-        
-        if (itemAttivo === (items.length -1)) {         // SE sono nell'ultima foto
-            next.classList.add("hidden");               // NASCONDO pulsante NEXT
-        }
+    items[itemAttivo].classList.remove("active");   // Rimuovo classe ACTIVE all'ITEM attualmente attivo
+    if (itemAttivo === (items.length - 1)) {        // SE mi trovo nell'ULTIMA foto
+        itemAttivo = -1;                            // Setto valore ITEM ATTIVO a -1 (così incrementato diventa 0)
     }
+    itemAttivo = itemAttivo + 1;                    // Incremento valore dell' ITEM ATTIVO
+    items[itemAttivo].classList.add("active");      // Assegno classe ACTIVE all'elemento (attualmente) successivo
 }
 
 // Collego funzione ad EVENTO su PREVIOUS
 previous.addEventListener("click", miaFunzione1);
 
 function miaFunzione1() {
-    if (itemAttivo === 1) {                             // Quando l'ITEM attivo è l'1 (foto 2),
-        previous.classList.add("hidden");               // Al CLICK, PREVIOUS scompare di nuovo
-    } if (itemAttivo < (items.length)) {                // SE sono in tutte e 5 le immagini (per la 4° non vale)
-        next.classList.remove("hidden");                // RIMOSTRO pulsante NEXT
-        items[itemAttivo].classList.remove("active");   // Rimuovo classe ACTIVE all'ITEM attualmente attivo
-        itemAttivo -= 1;                                // Decremento valore dell' ITEM ATTIVO
-        items[itemAttivo].classList.add("active");      // Assegno classe ACTIVE all'elemento (attualmente) precedente
+    items[itemAttivo].classList.remove("active");   // Rimuovo classe ACTIVE all'ITEM attualmente attivo
+    if (itemAttivo === 0) {                         // SE mi trovo nella PRIMA foto
+        itemAttivo = items.length;                  // Setto valore a ITEMS.LENGTH (5) (così decrementato diventa 4, cioè ultima foto)
     }
+    itemAttivo = itemAttivo - 1;                    // Decremento valore dell' ITEM ATTIVO
+    items[itemAttivo].classList.add("active");      // Assegno classe ACTIVE all'elemento (attualmente) successivo
 }
